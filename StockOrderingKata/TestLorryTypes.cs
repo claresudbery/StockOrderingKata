@@ -15,7 +15,7 @@ namespace StockOrderingKata
         public void Should_correctly_determine_refrigeratedness_for_each_lorry_type(string lorryType, bool expectedRefrigeratedness)
         {
             // Act
-            bool refrigeratedness = new Warehouse().IsRefrigerated(lorryType);
+            bool refrigeratedness = new Warehouse().IsLorryRefrigerated(lorryType);
 
             // Assert
             Assert.AreEqual(expectedRefrigeratedness, refrigeratedness);
@@ -33,7 +33,7 @@ namespace StockOrderingKata
             List<DispatchRequest> dispatchRequests = warehouse.ReconcileOrders();
 
             // Assert
-            Assert.AreEqual(true, warehouse.IsRefrigerated(dispatchRequests[0].LorryType));
+            Assert.AreEqual(true, warehouse.IsLorryRefrigerated(dispatchRequests[0].LorryType));
         }
 
         [TestCase("A")]
@@ -63,7 +63,7 @@ namespace StockOrderingKata
             List<DispatchRequest> dispatchRequests = warehouse.ReconcileOrders();
 
             // Assert
-            Assert.AreEqual(true, warehouse.IsRefrigerated(dispatchRequests[0].LorryType));
+            Assert.AreEqual(true, warehouse.IsLorryRefrigerated(dispatchRequests[0].LorryType));
         }
 
         [TestCase("A")]
@@ -89,12 +89,12 @@ namespace StockOrderingKata
             var warehouse = new Warehouse();
 
             // Act
-            warehouse.OrderStock(stockCode, 6);
             warehouse.OrderStock("C", 6);
+            warehouse.OrderStock(stockCode, 6);
             List<DispatchRequest> dispatchRequests = warehouse.ReconcileOrders();
 
             // Assert
-            Assert.AreEqual(true, warehouse.IsRefrigerated(dispatchRequests[0].LorryType));
+            Assert.AreEqual(true, warehouse.IsLorryRefrigerated(dispatchRequests[0].LorryType));
         }
 
         [TestCase("A")]
@@ -105,8 +105,8 @@ namespace StockOrderingKata
             var warehouse = new Warehouse();
 
             // Act
-            warehouse.OrderStock(stockCode, 6);
             warehouse.OrderStock("C", 6);
+            warehouse.OrderStock(stockCode, 6);
             List<DispatchRequest> dispatchRequests = warehouse.ReconcileOrders();
 
             // Assert
@@ -121,12 +121,12 @@ namespace StockOrderingKata
             var warehouse = new Warehouse();
 
             // Act
-            warehouse.OrderStock(stockCode, 50);
             warehouse.OrderStock("C", 5);
+            warehouse.OrderStock(stockCode, 50);
             List<DispatchRequest> dispatchRequests = warehouse.ReconcileOrders();
 
             // Assert
-            Assert.AreEqual(true, warehouse.IsRefrigerated(dispatchRequests[0].LorryType));
+            Assert.AreEqual(true, warehouse.IsLorryRefrigerated(dispatchRequests[0].LorryType));
         }
 
         [TestCase("A")]
@@ -137,8 +137,8 @@ namespace StockOrderingKata
             var warehouse = new Warehouse();
 
             // Act
-            warehouse.OrderStock(stockCode, 50);
             warehouse.OrderStock("C", 5);
+            warehouse.OrderStock(stockCode, 50);
             List<DispatchRequest> dispatchRequests = warehouse.ReconcileOrders();
 
             // Assert
@@ -157,7 +157,7 @@ namespace StockOrderingKata
             List<DispatchRequest> dispatchRequests = warehouse.ReconcileOrders();
 
             // Assert
-            Assert.AreEqual(false, warehouse.IsRefrigerated(dispatchRequests[0].LorryType));
+            Assert.AreEqual(false, warehouse.IsLorryRefrigerated(dispatchRequests[0].LorryType));
         }
 
         [TestCase("C")]
@@ -187,7 +187,7 @@ namespace StockOrderingKata
             List<DispatchRequest> dispatchRequests = warehouse.ReconcileOrders();
 
             // Assert
-            Assert.AreEqual(false, warehouse.IsRefrigerated(dispatchRequests[0].LorryType));
+            Assert.AreEqual(false, warehouse.IsLorryRefrigerated(dispatchRequests[0].LorryType));
         }
 
         [TestCase("C")]

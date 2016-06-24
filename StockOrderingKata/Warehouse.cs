@@ -127,7 +127,7 @@ namespace StockOrderingKata
             {
                 allDispatchRequests.Add(
                     CreateDispatchRequest(
-                        _ordersForToday[0].StockCode,
+                        GetMostRelevantStockCode(),
                         _ordersForToday.Sum(x => x.NumUnits))
                 );
             }
@@ -135,12 +135,32 @@ namespace StockOrderingKata
             return allDispatchRequests;
         }
 
+        private string GetMostRelevantStockCode()
+        {
+            return _ordersForToday.Any(x => IsStockRefrigerated(x.StockCode)) 
+                ? _ordersForToday.First(x => IsStockRefrigerated(x.StockCode)).StockCode 
+                : _ordersForToday[0].StockCode;
+        }
+
+        private bool IsStockRefrigerated(string stockCode)
+        {
+            var refrigerationValues = new Dictionary<string, bool>
+            {
+                { "A", true },
+                { "B", true },
+                { "C", false },
+                { "D", false}
+            };
+
+            return refrigerationValues.ContainsKey(stockCode) ? refrigerationValues[stockCode] : false;
+        }
+
         public void EndOfDay()
         {
             _ordersForToday.Clear();
         }
 
-        public bool IsRefrigerated(string lorryType)
+        public bool IsLorryRefrigerated(string lorryType)
         {
             var refrigerationValues = new Dictionary<string, bool>
             {
