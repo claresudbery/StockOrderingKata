@@ -64,12 +64,23 @@ namespace StockOrderingKata
 
         public List<DispatchRequest> ReconcileOrders()
         {
-            return new List<DispatchRequest>
+            var allDispatchRequests = new List<DispatchRequest>();
+
+            if (_ordersForToday.Any())
             {
-                CreateDispatchRequest(
-                    _ordersForToday[0].StockCode,
-                    _ordersForToday.Sum(x => x.NumUnits))
-            };
+                allDispatchRequests.Add(
+                    CreateDispatchRequest(
+                        _ordersForToday[0].StockCode,
+                        _ordersForToday.Sum(x => x.NumUnits))
+                );
+            }
+
+            return allDispatchRequests;
+        }
+
+        public void EndOfDay()
+        {
+            _ordersForToday.Clear();
         }
     }
 }
