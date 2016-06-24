@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using NUnit.Framework.Interfaces;
 
 namespace StockOrderingKata
 {
@@ -24,7 +25,26 @@ namespace StockOrderingKata
 
             var consignmentAsList = GetConsignmentAsList(stockCode, numPallets);
 
-            return new DispatchRequest {Consignment = consignmentAsList.ToArray()};
+            var lorryType = GetLorryType(stockCode);
+
+            return new DispatchRequest
+            {
+                Consignment = consignmentAsList.ToArray(),
+                LorryType = lorryType
+            };
+        }
+
+        private string GetLorryType(string stockCode)
+        {
+            Dictionary<string, string> lorryTypes = new Dictionary<string, string>
+            {
+                { "A", "Modified Transit" },
+                { "B", "Modified Transit" },
+                { "C", "Transit" },
+                { "D", "Transit" },
+            };
+
+            return lorryTypes.ContainsKey(stockCode) ? lorryTypes[stockCode] : "Unknown";
         }
 
         private static List<string> GetConsignmentAsList(string stockCode, int numPallets)
@@ -81,6 +101,17 @@ namespace StockOrderingKata
         public void EndOfDay()
         {
             _ordersForToday.Clear();
+        }
+
+        public bool IsRefrigerated(string lorryType)
+        {
+            var refrigerationValues = new Dictionary<string, bool>
+            {
+                { "Modified Transit", true },
+                { "Transit", false }
+            };
+
+            return refrigerationValues.ContainsKey(lorryType) ? refrigerationValues[lorryType] : false;
         }
     }
 }
