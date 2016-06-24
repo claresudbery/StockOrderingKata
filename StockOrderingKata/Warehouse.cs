@@ -6,21 +6,44 @@ namespace StockOrderingKata
     {
         public DispatchRequest OrderStock(string stockCode, int numUnits)
         {
-            int numPallets = PrepareOnePalletForEverySixUnitsOrFewer(numUnits);
+            int numPallets = PrepareOnePalletForEveryBatchOfUnits(numUnits, GetBatchSize(stockCode));
 
-            var consignmentAsList = new List<string>();
-
-            for (int palletCount = 1; palletCount <= numPallets; palletCount++)
-            {
-                consignmentAsList.Add("A");
-            }
+            var consignmentAsList = GetConsignmentAsList(stockCode, numPallets);
 
             return new DispatchRequest { Consignment = consignmentAsList.ToArray() };
         }
 
-        private int PrepareOnePalletForEverySixUnitsOrFewer(int numUnits)
+        private static List<string> GetConsignmentAsList(string stockCode, int numPallets)
         {
-            return ((numUnits - 1)/6) + 1;
+            var consignmentAsList = new List<string>();
+
+            for (int palletCount = 1; palletCount <= numPallets; palletCount++)
+            {
+                consignmentAsList.Add(stockCode);
+            }
+
+            return consignmentAsList;
+        }
+
+        private int GetBatchSize(string stockCode)
+        {
+            Dictionary<string, int> batchSizes = new Dictionary<string, int>
+            {
+                {"A", 6},
+                {"B", 10},
+            };
+
+            return batchSizes[stockCode];
+        }
+
+        private int PrepareOnePalletForEveryBatchOfUnits(int numUnits, int batchSize)
+        {
+            return OnePalletForEveryNUnitsOrFewer(numUnits, batchSize);
+        }
+
+        private static int OnePalletForEveryNUnitsOrFewer(int numUnits, int batchSize)
+        {
+            return ((numUnits - 1)/ batchSize) + 1;
         }
     }
 }

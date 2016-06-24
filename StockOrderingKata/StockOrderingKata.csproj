@@ -55,8 +55,9 @@
   </Choose>
   <ItemGroup>
     <Compile Include="DispatchRequest.cs" />
-    <Compile Include="TestStockOrdering.cs" />
+    <Compile Include="TestStockOrderingForStockA.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TestStockOrderingForStockB.cs" />
     <Compile Include="Warehouse.cs" />
   </ItemGroup>
   <ItemGroup>
