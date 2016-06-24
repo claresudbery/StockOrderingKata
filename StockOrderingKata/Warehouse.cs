@@ -108,7 +108,9 @@ namespace StockOrderingKata
             var refrigerationValues = new Dictionary<string, bool>
             {
                 { "Modified Transit", true },
-                { "Transit", false }
+                { "Transit", false },
+                { "Box Van", false },
+                { "Lorry", true}
             };
 
             return refrigerationValues.ContainsKey(lorryType) ? refrigerationValues[lorryType] : false;

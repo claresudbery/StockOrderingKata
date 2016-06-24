@@ -8,6 +8,19 @@ namespace StockOrderingKata
     [TestFixture]
     public class TestLorryTypes
     {
+        [TestCase("Transit", false)]
+        [TestCase("Modified Transit", true)]
+        [TestCase("Box Van", false)]
+        [TestCase("Lorry", true)]
+        public void Should_correctly_determine_refrigeratedness_for_each_lorry_type(string lorryType, bool expectedRefrigeratedness)
+        {
+            // Act
+            bool refrigeratedness = new Warehouse().IsRefrigerated(lorryType);
+
+            // Assert
+            Assert.AreEqual(expectedRefrigeratedness, refrigeratedness);
+        }
+
         [TestCase("A")]
         [TestCase("B")]
         public void When_small_quantity_of_stock_is_refrigerated_then_refrigerated_lorry_is_used(string stockCode)
