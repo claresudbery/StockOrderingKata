@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace StockOrderingKata
 {
@@ -46,6 +47,11 @@ namespace StockOrderingKata
         private static int OnePalletForEveryNUnitsOrFewer(int numUnits, int batchSize)
         {
             return ((numUnits - 1)/ batchSize) + 1;
+        }
+
+        public List<DispatchRequest> ReconcileOrders()
+        {
+            return new List<DispatchRequest> {OrderStock("B", 30)};
         }
     }
 }
