@@ -31,7 +31,8 @@ namespace StockOrderingKata
             {
                 {"A", 6},
                 {"B", 10},
-                {"C", 20}
+                {"C", 20},
+                {"D", 48}
             };
 
             return batchSizes.ContainsKey(stockCode) ? batchSizes[stockCode] : -1;
