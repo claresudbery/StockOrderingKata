@@ -4,7 +4,7 @@ namespace StockOrderingKata
 {
     public class Warehouse
     {
-        public DispatchRequest Order(string stockCode, int numUnits)
+        public DispatchRequest OrderStock(string stockCode, int numUnits)
         {
             int numPallets = PrepareOnePalletForEverySixUnitsOrFewer(numUnits);
 
