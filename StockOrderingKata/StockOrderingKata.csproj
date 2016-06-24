@@ -55,6 +55,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="DispatchRequest.cs" />
+    <Compile Include="StockOrder.cs" />
     <Compile Include="TestMultipleOrdersPerDay.cs" />
     <Compile Include="TestStockOrderingForStockA.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

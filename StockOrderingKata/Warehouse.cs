@@ -1,17 +1,32 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace StockOrderingKata
 {
     public class Warehouse
     {
+        private List<StockOrder> _ordersForToday = new List<StockOrder>();
+
         public DispatchRequest OrderStock(string stockCode, int numUnits)
+        {
+            NoteOrder(stockCode, numUnits);
+
+            return CreateDispatchRequest(stockCode, numUnits);
+        }
+
+        private void NoteOrder(string stockCode, int numUnits)
+        {
+            _ordersForToday.Add(new StockOrder {StockCode = stockCode, NumUnits = numUnits});
+        }
+
+        private DispatchRequest CreateDispatchRequest(string stockCode, int numUnits)
         {
             int numPallets = PrepareOnePalletForEveryBatchOfUnits(numUnits, GetBatchSize(stockCode));
 
             var consignmentAsList = GetConsignmentAsList(stockCode, numPallets);
 
-            return new DispatchRequest { Consignment = consignmentAsList.ToArray() };
+            return new DispatchRequest {Consignment = consignmentAsList.ToArray()};
         }
 
         private static List<string> GetConsignmentAsList(string stockCode, int numPallets)
@@ -51,7 +66,12 @@ namespace StockOrderingKata
 
         public List<DispatchRequest> ReconcileOrders()
         {
-            return new List<DispatchRequest> {OrderStock("B", 30)};
+            return new List<DispatchRequest>
+            {
+                CreateDispatchRequest(
+                    _ordersForToday[0].StockCode,
+                    _ordersForToday.Sum(x => x.NumUnits))
+            };
         }
     }
 }
