@@ -1,0 +1,8 @@
+C:\_otherCode\StockOrderingKata\StockOrderingKata\bin\Debug\StockOrderingKata.dll
+C:\_otherCode\StockOrderingKata\StockOrderingKata\bin\Debug\StockOrderingKata.pdb
+C:\_otherCode\StockOrderingKata\StockOrderingKata\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
+C:\_otherCode\StockOrderingKata\StockOrderingKata\bin\Debug\nunit.framework.dll
+C:\_otherCode\StockOrderingKata\StockOrderingKata\bin\Debug\nunit.framework.xml
+C:\_otherCode\StockOrderingKata\StockOrderingKata\obj\Debug\StockOrderingKata.csprojResolveAssemblyReference.cache
+C:\_otherCode\StockOrderingKata\StockOrderingKata\obj\Debug\StockOrderingKata.dll
+C:\_otherCode\StockOrderingKata\StockOrderingKata\obj\Debug\StockOrderingKata.pdb
