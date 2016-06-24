@@ -25,7 +25,7 @@ namespace StockOrderingKata
 
             var consignmentAsList = GetConsignmentAsList(stockCode, numPallets);
 
-            var lorryType = GetLorryType(stockCode);
+            var lorryType = GetLorryType(stockCode, numPallets);
 
             return new DispatchRequest
             {
@@ -34,9 +34,16 @@ namespace StockOrderingKata
             };
         }
 
-        private string GetLorryType(string stockCode)
+        private string GetLorryType(string stockCode, int numPallets)
         {
-            Dictionary<string, string> lorryTypes = new Dictionary<string, string>
+            bool orderIsLarge = IsOrderLarge(stockCode, numPallets);
+
+            return orderIsLarge ? GetLargeLorryType(stockCode) : GetSmallLorryType(stockCode);
+        }
+
+        private string GetSmallLorryType(string stockCode)
+        {
+            Dictionary<string, string> smallLorryTypes = new Dictionary<string, string>
             {
                 { "A", "Modified Transit" },
                 { "B", "Modified Transit" },
@@ -44,7 +51,37 @@ namespace StockOrderingKata
                 { "D", "Transit" },
             };
 
-            return lorryTypes.ContainsKey(stockCode) ? lorryTypes[stockCode] : "Unknown";
+            return smallLorryTypes.ContainsKey(stockCode) ? smallLorryTypes[stockCode] : "Unknown";
+        }
+
+        private string GetLargeLorryType(string stockCode)
+        {
+            Dictionary<string, string> largeLorryTypes = new Dictionary<string, string>
+            {
+                { "A", "Lorry" },
+                { "B", "Lorry" },
+                { "C", "Box Van" },
+                { "D", "Box Van" },
+            };
+
+            return largeLorryTypes.ContainsKey(stockCode) ? largeLorryTypes[stockCode] : "Unknown";
+        }
+
+        private bool IsOrderLarge(string stockCode, int numPallets)
+        {
+            var orderLargenessThresholdPerStock = new Dictionary<string, int>
+            {
+                { "A", 3 },
+                { "B", 3 },
+                { "C", 4 },
+                { "D", 4 }
+            };
+
+            var threshold = orderLargenessThresholdPerStock.ContainsKey(stockCode)
+                ? orderLargenessThresholdPerStock[stockCode]
+                : 0;
+
+            return numPallets > threshold;
         }
 
         private static List<string> GetConsignmentAsList(string stockCode, int numPallets)
