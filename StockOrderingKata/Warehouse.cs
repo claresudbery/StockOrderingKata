@@ -8,11 +8,9 @@ namespace StockOrderingKata
     {
         private List<StockOrder> _ordersForToday = new List<StockOrder>();
 
-        public DispatchRequest OrderStock(string stockCode, int numUnits)
+        public void OrderStock(string stockCode, int numUnits)
         {
             NoteOrder(stockCode, numUnits);
-
-            return CreateDispatchRequest(stockCode, numUnits);
         }
 
         private void NoteOrder(string stockCode, int numUnits)
