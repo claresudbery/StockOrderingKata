@@ -31,9 +31,10 @@ namespace StockOrderingKata
             {
                 {"A", 6},
                 {"B", 10},
+                {"C", 20}
             };
 
-            return batchSizes[stockCode];
+            return batchSizes.ContainsKey(stockCode) ? batchSizes[stockCode] : -1;
         }
 
         private int PrepareOnePalletForEveryBatchOfUnits(int numUnits, int batchSize)
