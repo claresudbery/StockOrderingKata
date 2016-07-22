@@ -10,17 +10,25 @@ The table below shows how many units of each stock are delivered per pallet, and
 Stock which does not require refrigeration may still be transported in a vehicle with refrigeration capabilities.
 
 Code    Units per Pallet  Refrigerated?
+
 A       6                 Yes
+
 B       10                Yes
+
 C       20                No
+
 D       48                No
 
 Our logistics partner has a number of different types of vehicle available to us, each has a fixed cost per delivery, whether the vehicle is full or not.
 
 Vehicle type      Capacity (Pallets)  Refrigerated? Cost Per Delivery 
-Transit           4                   No            £50               
-Modified Transit  3                   Yes           £60               
-Box Van           8                   No            £80               
+
+Transit           4                   No            £50     
+
+Modified Transit  3                   Yes           £60   
+
+Box Van           8                   No            £80    
+
 Lorry             30                  Yes           £200
 
 A supermarket may make several delivery requests per day. Delivery requests are reconciled at the end of the day and your task is to ensure the cost of delivery is low as possible.
